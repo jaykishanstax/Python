@@ -1,5 +1,5 @@
 
-In this I am using "https://findslot.in/"  api to search cowin vaccination center.
+In this I am using "cdn-api.co-vin.in/api" api to search cowin vaccination center.
 
 
 I am checking every 2 min, if vaccination center is available, you will get mail on configured email address.
