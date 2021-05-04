@@ -1,7 +1,8 @@
 import json
 import random
 import requests
-import smtplib, ssl
+import smtplib
+import ssl
 import time
 from datetime import datetime
 
@@ -27,7 +28,8 @@ def main():
 
 def process():
 
-  url = 'https://findslot.in/api/getPincodeWiseVaccineCentersApi.php?pincode=380016'
+  url = 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=380016&date=04-05-2021'
+  #url = 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=382430&date=04-05-2021'
   headers = {
     'Content-Type': "application/json",
     'cache-control': "no-cache"
@@ -43,7 +45,19 @@ def process():
   print(datetime.now())
 
   if len(files['centers']) > 0 :
-      sendmail()
+    # print("done")
+    for i in range(len(files["centers"])):
+      if len(files["centers"][i]["sessions"]) > 0 :
+        for item in files["centers"][i]["sessions"]:
+          cap += int(item["available_capacity"])
+          #print(item["available_capacity"])
+      #print(files["centers"][i]["sessions"])
+      #sendmail()
+
+  if cap > 0 :
+    print("Availale capacity")
+    print(cap)
+    sendmail()
   time.sleep(120)
 
 if __name__== "__main__":
